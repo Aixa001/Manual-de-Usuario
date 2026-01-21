@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual De Usuario</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #020617; color: #f8fafc; overflow-x: hidden; }
+        .mono { font-family: 'Fira Code', monospace; }
+        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .fade-out { animation: fadeOut 0.4s ease-in forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover {
+            border-color: #38bdf8;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.15);
+            transform: translateY(-5px);
+        }
+        .logo-img { width: 60px; height: 60px; object-fit: contain; }
+    </style>
+</head>
+<body>
+
+    <div id="home-page" class="min-h-screen flex flex-col items-center justify-center p-6 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-black">
+        <header class="text-center mb-16 fade-in">
+            <div class="inline-block px-3 py-1 mb-4 border border-sky-500/30 rounded-full bg-sky-500/10">
+                <span class="text-sky-400 text-xs font-bold tracking-widest uppercase">Manual de Usuario</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl md:text-6xl font-black mb-4 tracking-tighter text-nowrap">
+                <span class="text-white">BASES</span><span class="text-sky-500">_DE_</span><span class="text-white/50">DATOS</span>
+            </h1>
+            <p class="text-slate-500 mono text-sm tracking-wider uppercase"> EN PYTHON</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl w-full">
+            <button onclick="navigate('mysql')" class="glass-card p-10 rounded-[2rem] group text-center relative overflow-hidden">
+                <img src="https://www.vectorlogo.zone/logos/mysql/mysql-official.svg" class="logo-img mx-auto mb-6 opacity-60 group-hover:opacity-100 transition" alt="MySQL Logo">
+                <h3 class="text-xl font-extrabold text-white">MySQL</h3>
+                <div class="absolute bottom-0 left-0 h-1 w-0 bg-orange-500 group-hover:w-full transition-all"></div>
+            </button>
+
+            <button onclick="navigate('postgres')" class="glass-card p-10 rounded-[2rem] group text-center relative overflow-hidden">
+                <img src="https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg" class="logo-img mx-auto mb-6 opacity-60 group-hover:opacity-100 transition" alt="Postgres Logo">
+                <h3 class="text-xl font-extrabold text-white">PostgreSQL</h3>
+                <div class="absolute bottom-0 left-0 h-1 w-0 bg-blue-600 group-hover:w-full transition-all"></div>
+            </button>
+
+            <button onclick="navigate('sqlserver')" class="glass-card p-10 rounded-[2rem] group text-center relative overflow-hidden">
+                <img src="https://cdn.worldvectorlogo.com/logos/microsoft-sql-server-1.svg" class="logo-img mx-auto mb-6 opacity-60 group-hover:opacity-100 transition" alt="SQL Server Logo">
+                <h3 class="text-xl font-extrabold text-white">SQL Server</h3>
+                <div class="absolute bottom-0 left-0 h-1 w-0 bg-red-600 group-hover:w-full transition-all"></div>
+            </button>
+
+            <button onclick="navigate('access')" class="glass-card p-10 rounded-[2rem] group text-center relative overflow-hidden">
+                <img src="https://cdn.worldvectorlogo.com/logos/microsoft-access-1.svg" class="logo-img mx-auto mb-6 opacity-60 group-hover:opacity-100 transition" alt="Access Logo">
+                <h3 class="text-xl font-extrabold text-white">MS Access</h3>
+                <div class="absolute bottom-0 left-0 h-1 w-0 bg-purple-600 group-hover:w-full transition-all"></div>
+            </button>
+        </div>
+
+        <button onclick="navigate('general')" class="mt-20 group flex items-center space-x-3 text-slate-400 hover:text-white transition">
+            <span class="h-[1px] w-8 bg-slate-700 group-hover:bg-sky-500 transition"></span>
+            <span class="mono text-xs uppercase tracking-widest">HERRAMIENTAS ADISIONALES</span>
+            <span class="h-[1px] w-8 bg-slate-700 group-hover:bg-sky-500 transition"></span>
+        </button>
+    </div>
+
+    <div id="content-page" class="hidden min-h-screen bg-[#020617] p-6 md:p-16">
+        <div class="max-w-5xl mx-auto">
+            <button onclick="goBack()" class="mb-12 text-slate-500 hover:text-white flex items-center mono text-xs uppercase tracking-widest transition group">
+                <span class="mr-2 transform group-hover:-translate-x-2 transition">←</span> INICIO
+            </button>
+
+            <div id="dynamic-content" class="fade-in"></div>
+        </div>
+    </div>
+
+    <footer class="py-10 text-center border-t border-white/5 bg-black/20">
+        <p class="text-slate-500 mono text-xs tracking-[0.4em] uppercase">
+            Página creada por <span class="text-sky-500 font-bold">Alexa Granado</span>
+        </p>
+    </footer>
+
+    <script>
+        const contentData = {
+            mysql: {
+                title: "MySQL & MariaDB Server",
+                logo: "https://www.vectorlogo.zone/logos/mysql/mysql-official.svg",
+                info: "El RDBMS de código abierto más utilizado para el desarrollo de aplicaciones web escalables.",
+                details: "MySQL es un sistema de gestión de bases de datos relacionales basado en SQL con una arquitectura multi-hilo optimizada para altas tasas de lectura. <b>MariaDB</b> es su variante comunitaria que ofrece mejoras en motores de almacenamiento y rendimiento de consultas. Es fundamental en entornos de desarrollo Python por su facilidad de integración y robustez en la gestión de transacciones.",
+                pros: [
+                    "Alta velocidad en operaciones de lectura masiva",
+                    "Ecosistemas de seguridad granular y robusto",
+                    "Compatibilidad multiplataforma y documentación extensa",
+                    "Optimización  de almacenamiento con el motor InnoDB"
+                ],
+                lib: "mysql-connector-python",
+                code: "Para este sistema, el proceso se divide en el servidor y el conector de Python:\n\n     1. Descargar el instalador: Ve al sitio oficial de MySQL y descarga el 'MySQL Installer for Windows'.\n\n     2. Configurar el servidor: Durante la instalación, elige la opción 'Developer Default', configura una contraseña para el usuario root y asegúrate de que el puerto 3306 esté abierto.\n\n     3. Instalar la librería: Abre tu terminal (CMD o PowerShell) y ejecuta el comando que ya tienes en tu código: \n           ∙ pip install mysql-connector-python.\n\n     4. Verificación: Abre una consola de Python y escribe import mysql.connector para confirmar que no hay errores.",
+            },
+            postgres: {
+                title: "PostgreSQL Advanced Engine",
+                logo: "https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg",
+                info: "Un potente sistema de base de datos objeto-relacional de código abierto reconocido por su fiabilidad.",
+                details: "PostgreSQL destaca por su estricto cumplimiento de los principios ACID y los estándares SQL modernos. Su arquitectura permite manejar tipos de datos complejos y consultas analíticas pesadas. Es la opción preferida cuando se requiere integridad referencial absoluta, soporte nativo para JSONB (NoSQL) y funciones espaciales avanzadas mediante PostGIS.",
+                pros: [
+                    "Cumplimiento total de transacciones ACID",
+                    "Soporte avanzado para datos JSONB y NoSQL",
+                    "Extensibilidad mediante funciones personalizadas",
+                    "Manejo eficiente de alta concurrencia"
+                ],
+                lib: "psycopg2-binary",
+                code: "PostgreSQL requiere un adaptador específico para interactuar con Python:\n\n      1. Instalador EDB: Descarga el instalador de PostgreSQL desde el sitio oficial.\n\n      2. pgAdmin: Asegúrate de marcar la casilla de 'pgAdmin 4', que es la interfaz gráfica para gestionar tus tablas.\n\n      3. Instalar la librería: En tu terminal, instala el adaptador binario:\n            ∙ pip install psycopg2-binary\n\n      4. Conexión: Usa las credenciales creadas (usuario postgres y puerto 5432) para probar la conexión desde tu script."
+            },
+            sqlserver: {
+                title: "Microsoft SQL Server",
+                logo: "https://cdn.worldvectorlogo.com/logos/microsoft-sql-server-1.svg",
+                info: "Plataforma de gestión de datos empresarial diseñada para seguridad y análisis crítico a gran escala.",
+                details: "SQL Server ofrece un conjunto de herramientas integradas para la inteligencia de negocios y el manejo de Big Data. <br><br> Utiliza el lenguaje T-SQL para extender las capacidades del SQL estándar, permitiendo programación lógica compleja directamente en el servidor. Su integración con el ecosistema Windows lo hace ideal para infraestructuras corporativas que requieren alta disponibilidad y seguridad integrada.",
+                pros: [
+                    "Integración nativa con Active Directory",
+                    "Herramientas de BI y reporteo potentes", 
+                    "Seguridad de nivel gubernamental y cifrado",
+                    "Excelente soporte corporativo directo"
+                ],
+                lib: "pyodbc",
+                code: "Ambos sistemas de Microsoft utilizan el mismo estándar de conexión (ODBC) en Python:\n\n      1. SQL Server: Descarga 'SQL Server Express' y el 'SQL Server Management Studio (SSMS)'.\n\n      2. Microsoft Access: Debes tener instalado Microsoft Office o el 'Microsoft Access Database Engine'.\n\n      3. Driver ODBC: Es vital descargar e instalar el 'ODBC Driver for SQL Server' desde la página de Microsoft para que Python pueda 'hablar' con la base de datos.\n\n      4. Instalar la librería: Usa el comando pyodbc que ya incluiste en tu código:\n           ∙ pip install pyodbc"
+            },
+            access: {
+                title: "Microsoft Access (Jet/ACE)",
+                logo: "https://cdn.worldvectorlogo.com/logos/microsoft-access-1.svg",
+                info: "Sistema de gestión local ideal para prototipado rápido y aplicaciones de escritorio portátiles.",
+                details: "Access utiliza el motor de base de datos ACE para permitir el almacenamiento de datos en archivos locales (.accdb).  Aunque no es para aplicaciones web masivas, es excelente para herramientas internas de oficina y gestión de datos locales gracias a su portabilidad por archivo único. Su conexión con Python se realiza mediante controladores ODBC para interactuar con los datos de forma relacional.",
+                pros: [
+                    "Portabilidad total mediante un solo archivo",
+                    "Fácil despliegue sin necesidad de servidores",
+                    "Curva de aprendizaje baja para principiantes",
+                    "Integración inmediata con Microsoft Office"
+                ],
+                lib: "pyodbc",
+                code: "Ambos sistemas de Microsoft utilizan el mismo estándar de conexión (ODBC) en Python:\n\n      1. SQL Server: Descarga 'SQL Server Express' y el 'SQL Server Management Studio (SSMS)'.\n\n      2. Microsoft Access: Debes tener instalado Microsoft Office o el 'Microsoft Access Database Engine'.\n\n      3. Driver ODBC: Es vital descargar e instalar el 'ODBC Driver for SQL Server' desde la página de Microsoft para que Python pueda 'hablar' con la base de datos.\n\n      4. Instalar la librería: Usa el comando pyodbc que ya incluiste en tu código:\n           ∙ pip install pyodbc"
+            },
+            general: {
+                title: "Herramientas Adicionales",
+                logo: "https://cdn.worldvectorlogo.com/logos/python-5.svg",
+                info: "El ecosistema de Python ofrece herramientas para elevar la gestión de datos a un nivel profesional más allá de las consultas SQL básicas.",
+                details: "<b>Pandas</b> es una librería de código abierto fundamental para la ciencia de datos en Python. Su función técnica principal es la manipulación de datos estructurados a través de 'DataFrames'. En el manejo de bases de datos, permite leer tablas completas con una sola línea de código, facilitando el análisis estadístico y la limpieza de resgistros antes de procesarlos. <br><br> <b>Alembic</b> se define como una herramienta de migraciones para bases de datos vinculada a SQLAlchemy. Su propósito técnico es actuar como un sistema de control de versiones para el esquema de la base de datos; permite rastrear, aplicar y revertir cambios estructurales (como añadir tablas o modificar columnas) de manera controlada y profesional, asegurando que todos los desarrolladores trabajen sobre el mismo esquema. <br><br> <b>SQLObject</b> es un Mapeador Objeto-Relacional (ORM) que permite a los desarrolladores interactuar con bases de datos relaciones utilizando el paradigma de programación orientada a objetos. Transforma automáticamente las tablas en clases de Python y las filas en instancias de dichas clases, eliminando la necesidad de escribir código SQL manual para operaciones comunes y acelerando el ciclo de desarrollo.",
+                pros: [
+                    "Pandas: Análisis estadístico, limpieza de datos",
+                    "Alembic: Control de versiones para el esquema de bases de datos", 
+                    "SQLObject: Mapeo de objetos (ORM) para evitar SQL manual",
+                    "Integración: Conexión fluida entre tablas SQL y objetos Python",
+                    "Productividad: Reducción de líneas de código en tareas CRUD",
+                    "Escalabilidad: Facilidad para migrar de una base local a una nube"
+                ],
+                lib: "pandas, alembic, sqlobject",
+                code: "Como estas son librerías puras de Python, el proceso es más directo:\n\n      1. Pandas: Ejecuta pip install pandas. Es la base para el análisis de tablas.\n\n      2. Alembic: Requiere SQLAlchemy previo. Ejecuta pip install alembic.\n\n      3. SQLObject: Instala con pip install SQLObject para empezar a usar el ORM."
+            }
+        };
+
+        function navigate(key) {
+            const home = document.getElementById('home-page');
+            const content = document.getElementById('content-page');
+            const dynamic = document.getElementById('dynamic-content');
+            const data = contentData[key];
+
+            home.classList.add('fade-out');
+            
+            setTimeout(() => {
+                home.style.display = 'none';
+                home.classList.remove('fade-out');
+                content.classList.remove('hidden');
+                
+                let prosHTML = data.pros.map(p => `<li class="flex items-center space-x-2"><span class="text-sky-500">▹</span><span>${p}</span></li>`).join('');
+
+                dynamic.innerHTML = `
+                    <div class="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-10 mb-12">
+                        <div class="p-4 p-6 bg-white/5 rounded-[2.5rem] border border-white/10 shadow-2xl">
+                            <img src="${data.logo}" class="w-16 h-16 md:w-24 md:h-24 object-contain" alt="Logo">
+                        </div>
+                        <div>
+                            <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-2 tracking-tighter">${data.title}</h1>
+                            <p class="text-sky-400 mono uppercase tracking-widest text-xs font-bold">Documentación Técnica Ofical</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                        <div class="lg:col-span-2 space-y-8">
+                            <div class="bg-white/5 p-8 rounded-3xl border border-white/5">
+                                <h4 class="text-white font-bold mb-4 flex items-center">
+                                    <span class="w-2 h-2 bg-sky-500 rounded-full mr-3"></span> Descripción General
+                                </h4>
+                                <p class="text-slate-400 leading-relaxed text-lg">${data.info}</p>
+                                <p class="text-slate-400 leading-relaxed text-lg mt-4">${data.details}</p>
+                            </div>
+                        </div>
+                        <div class="bg-sky-500/5 p-8 rounded-3xl border border-sky-500/20">
+                            <h4 class="text-sky-400 font-bold mb-6 uppercase text-xs tracking-widest">Ventajas Clave</h4>
+                            <ul class="text-slate-300 space-y-4 font-medium italic">
+                                ${prosHTML}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                        <div class="bg-black/40 p-6 rounded-2xl border border-white/10">
+                            <h5 class="text-slate-500 text-xs font-bold uppercase mb-2">Librería de Importación</h5>
+                            <p class="mono text-sky-400 text-xl font-bold">${data.lib}</p>
+                        </div>
+                        <div class="bg-black/40 p-6 rounded-2xl border border-white/10">
+                            <h5 class="text-slate-500 text-xs font-bold uppercase mb-2">Comando de Instalación</h5>
+                            <p class="mono text-emerald-400 text-xl font-bold">pip install ${data.lib}</p>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="absolute -top-3 left-6 bg-sky-600 text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Instalación</div>
+                        <pre class="bg-[#050505] p-10 rounded-[2rem] border border-white/5 overflow-x-auto shadow-inner"><code class="text-sky-300 mono text-sm leading-loose">${data.code}</code></pre>
+                    </div>
+                `;
+                window.scrollTo(0,0);
+            }, 300);
+        }
+
+        function goBack() {
+            const home = document.getElementById('home-page');
+            const content = document.getElementById('content-page');
+            content.classList.add('fade-out');
+            setTimeout(() => {
+                content.classList.add('hidden');
+                content.classList.remove('fade-out');
+                home.style.display = 'flex';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
